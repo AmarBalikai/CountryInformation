@@ -1,0 +1,2 @@
+rootProject.name='CountryInformation'
+include ':app'

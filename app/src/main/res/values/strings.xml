@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CountryInformation</string>
+    <string name="device_not_connected_to_internet">"Device not connected to internet "</string>
+
+
+
+</resources>
