@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var builder: AlertDialog.Builder
     lateinit var dialog: AlertDialog
     private lateinit var linearLayoutManager: LinearLayoutManager
-
+// android:text="@{data.title==null?`No title`:data.title}"
     //lateinit var binding:ActivityMainBinding
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         swipeToRefresh.setOnRefreshListener(OnRefreshListener {
             callApi()
-            swipeToRefresh.isRefreshing = false
+
         })
         mAdapter = CountryAdapter(ArrayList(), this)
         linearLayoutManager = LinearLayoutManager(this)
@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         mDataViewModel.dataList.observe(this, Observer { countryList ->
 
             hideDialog()
+            swipeToRefresh.isRefreshing = false
             //update title
             if(sharedPreferences.getString(Constentes.countryName, "")!="")
             {
@@ -62,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 
             //setup list
             mAdapter.setList(countryList)
-           // Toast.makeText(applicationContext,"doneeee",Toast.LENGTH_SHORT).show()
+
         })
 
     }
@@ -135,6 +136,7 @@ class MainActivity : AppCompatActivity() {
     fun hideDialog() {
         if (dialog != null && dialog.isShowing) {
             dialog.hide()
+            dialog.dismiss()
         }
     }
 

@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="serif"
 
-                    android:text="@{data.title}"
+                    android:text="@{data.title!=null?data.title:`No Title`}"
                     android:textColor="@color/blue"
                     android:textSize="@dimen/_14ssp"
                     android:textStyle="bold"
@@ -72,7 +72,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.8"
                         android:fontFamily="serif"
-                        android:text="@{data.description}"
+                        android:text="@{data.description!=null?data.description:`No Description`}"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/_12ssp"
                         android:typeface="sans" />

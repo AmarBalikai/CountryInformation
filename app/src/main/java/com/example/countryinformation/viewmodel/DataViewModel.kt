@@ -11,6 +11,7 @@ import com.example.countryinformation.adapter.CountryAdapter
 import com.example.countryinformation.model.CountryModel
 import com.example.countryinformation.model.InfoModelData
 import com.example.countryinformation.roomdatabase.CountryEntity
+import com.example.countryinformation.utils.Constentes
 import com.example.countryinformation.viewmodel.ResponseCallback
 import kotlinx.coroutines.launch
 import org.jetbrains.annotations.NotNull
@@ -37,7 +38,7 @@ class DataViewModel(@NotNull application: Application) : AndroidViewModel(applic
     }
 
     override fun onError(error: String?) {
-        Toast.makeText(getApplication(),error,Toast.LENGTH_SHORT).show()
+        Toast.makeText(getApplication(),Constentes.something_went_wrong,Toast.LENGTH_SHORT).show()
         dataList.value= ArrayList()
     }
 
