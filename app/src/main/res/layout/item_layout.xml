@@ -4,6 +4,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <import type="android.view.View" />
 
         <variable
@@ -23,88 +24,89 @@
             android:layout_margin="@dimen/_5sdp"
             card_view:cardCornerRadius="@dimen/_3sdp"
             card_view:cardElevation="@dimen/_5sdp">
+
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:weightSum="2"
-                android:layout_height="wrap_content">
-
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_weight="0.1"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvId"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:layout_marginLeft="@dimen/_5sdp"
-                android:layout_marginRight="@dimen/_5sdp"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-                <TextView
-                    android:id="@+id/tvName"
-
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="serif"
-
-                    android:text="@{data.title!=null?data.title:`No Title`}"
-                    android:textColor="@color/blue"
-                    android:textSize="@dimen/_14ssp"
-                    android:textStyle="bold"
-                    android:typeface="sans" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvName"
-                    android:orientation="horizontal"
-
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:weightSum="2">
+                    android:layout_below="@+id/tvId"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_weight="0.15"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tvDesc"
+                        android:id="@+id/tvName"
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.8"
                         android:fontFamily="serif"
-                        android:text="@{data.description!=null?data.description:`No Description`}"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/_12ssp"
+
+                        android:text="@{data.title!=null?data.title:`No Title`}"
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/_14ssp"
+                        android:textStyle="bold"
                         android:typeface="sans" />
 
-                    <ImageView
-                        android:id="@+id/imgImage"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.2"
-                        android:src="@mipmap/ic_launcher" />
-                </LinearLayout>
+                        android:layout_below="@+id/tvName"
+                        android:layout_marginTop="@dimen/_2sdp"
 
-                <!--<ImageView
-                    android:id="@+id/ivArrowr"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_right_arrow" />-->
-            </RelativeLayout>
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+
+                            android:id="@+id/tvDesc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.6"
+                            android:fontFamily="serif"
+                            android:paddingRight="@dimen/_5sdp"
+                            android:paddingEnd="@dimen/_5sdp"
+                            android:text="@{data.description!=null?data.description:`No Description`}"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_12ssp"
+                            android:typeface="sans" />
+
+                        <ImageView
+
+                            android:id="@+id/imgImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.4"
+                            android:src="@mipmap/ic_launcher" />
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
                 <LinearLayout
-                    android:layout_gravity="end"
                     android:layout_width="match_parent"
-                    android:layout_weight="1.9"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
 
-                    android:layout_height="match_parent">
+
+                    android:layout_weight="1.85">
+
                     <ImageView
+
                         android:id="@+id/ivArrow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
                         android:layout_centerVertical="true"
+                        android:layout_gravity="center"
                         android:src="@drawable/ic_right_arrow" />
                 </LinearLayout>
             </LinearLayout>
