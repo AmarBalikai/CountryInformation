@@ -17,25 +17,22 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RepositoryViewModel {
+class RepositoryViewModel(application: Application) {
 
     private var countryDao: CountryDao
     private lateinit var listCountry: LiveData<List<CountryEntity>>
-    lateinit var listData:ArrayList<CountryEntity>
-    lateinit var sharedPreferences: SharedPreferences.Editor
-    lateinit var mlocalSharedPreferences: LocalSharedPreferences
+
+    var mlocalSharedPreferences: LocalSharedPreferences = LocalSharedPreferences()
     private lateinit var countryDatabase: CountryDatabase
 
-     constructor(application: Application) {
-        mlocalSharedPreferences = LocalSharedPreferences()
+    init {
         countryDatabase = CountryDatabase.invoke(application)
         countryDao = countryDatabase.getCountryDao()
     }
 
 
     fun getDataFromServer(objCallback: ResponseCallback) {
-        var listResponse: MutableLiveData<ArrayList<InfoModelData>>
-        listResponse=MutableLiveData()
+        val listResponse: MutableLiveData<ArrayList<InfoModelData>> = MutableLiveData()
 
         val data: Call<CountryModel>? = ApiClient.build()?.getList()
         val enqueue = data?.enqueue(object : Callback<CountryModel> {
@@ -55,18 +52,5 @@ class RepositoryViewModel {
             }
         })
     }
-
-    fun saveDataToDatabase(data: ArrayList<CountryEntity>?) {
-        countryDao.insertAll(data)
-    }
-
-
-
-    fun getDataFromDatabase(): LiveData<List<CountryEntity>> {
-        countryDao = countryDatabase.getCountryDao()
-        listCountry = countryDao.getAllCountries()
-        return listCountry
-    }
-
 
 }

@@ -11,9 +11,9 @@ import com.example.countryinformation.viewmodel.repositoty.RepositoryViewModel
 import org.jetbrains.annotations.NotNull
 
 class DataViewModel(@NotNull application: Application) : AndroidViewModel(application),ResponseCallback{
-    var objApplication: Application = application
+   private var objApplication: Application = application
     private lateinit var repositoryViewModel: RepositoryViewModel
-     var arrList=ArrayList<CountryEntity>()
+
     lateinit var dataList: MutableLiveData<ArrayList<InfoModelData>>
 
     init {

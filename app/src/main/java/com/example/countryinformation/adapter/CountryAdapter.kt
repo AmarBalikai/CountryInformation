@@ -14,7 +14,7 @@ import com.example.countryinformation.model.InfoModelData
 
 
 
-class CountryAdapter(var countryList: ArrayList<InfoModelData>, var context:Context) : RecyclerView.Adapter<CountryAdapter.ViewHolder>() {
+class CountryAdapter(private var countryList: ArrayList<InfoModelData>,private var context:Context) : RecyclerView.Adapter<CountryAdapter.ViewHolder>() {
 
     //this method is returning the view for each item in the list
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,7 +35,7 @@ class CountryAdapter(var countryList: ArrayList<InfoModelData>, var context:Cont
         return countryList.size
     }
 
-    class ViewHolder(val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: InfoModelData) {
 
             Glide.with(itemView)

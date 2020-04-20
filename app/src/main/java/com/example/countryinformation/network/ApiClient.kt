@@ -8,19 +8,19 @@ import retrofit2.converter.gson.GsonConverterFactory
 object ApiClient {
 
 
-    private val API_BASE_URL = "https://dl.dropboxusercontent.com"
+    private const val API_BASE_URL = "https://dl.dropboxusercontent.com"
 
     private var servicesApiInterface: APIInterface? = null
 
     fun build(): APIInterface? {
-        var builder: Retrofit.Builder = Retrofit.Builder()
+        val builder: Retrofit.Builder = Retrofit.Builder()
             .baseUrl(API_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
 
-        var httpClient: OkHttpClient.Builder = OkHttpClient.Builder()
+        val httpClient: OkHttpClient.Builder = OkHttpClient.Builder()
         httpClient.addInterceptor(interceptor())
 
-        var retrofit: Retrofit = builder.client(httpClient.build()).build()
+        val retrofit: Retrofit = builder.client(httpClient.build()).build()
         servicesApiInterface = retrofit.create(
             APIInterface::class.java
         )

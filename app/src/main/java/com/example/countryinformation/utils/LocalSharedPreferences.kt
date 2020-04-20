@@ -4,22 +4,14 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.example.countryinformation.application.ApplicationContext.Companion.context
 
-class LocalSharedPreferences {
-    lateinit var mSharedPreferences: SharedPreferences
-    lateinit var sharedPreferencesEdit: SharedPreferences.Editor
+class LocalSharedPreferences() {
+    private var mSharedPreferences: SharedPreferences =
+        context.getSharedPreferences(Constant.countryInfo, Context.MODE_PRIVATE)
+    private lateinit var sharedPreferencesEdit: SharedPreferences.Editor
 
-    constructor() {
-        mSharedPreferences =
-            context.getSharedPreferences(Constant.countryInfo, Context.MODE_PRIVATE)
+    init {
         sharedPreferencesEdit = mSharedPreferences.edit()
     }
-
-    /*fun initSharedPreference(context: Application){
-       // if (mSharedPreferences == null)
-            mSharedPreferences =
-                context.getSharedPreferences(Constentes.countryInfo, Context.MODE_PRIVATE)
-
-    }*/
 
 
     fun getString(text: String): String? {

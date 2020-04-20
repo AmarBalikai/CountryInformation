@@ -22,9 +22,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mDataViewModel: DataViewModel
     private lateinit var mAdapter: CountryAdapter
    // lateinit var sharedPreferences: SharedPreferences
-    lateinit var builder: AlertDialog.Builder
-    lateinit var dialog: AlertDialog
-    lateinit var mlocalSharedPreferences: LocalSharedPreferences
+    private lateinit var builder: AlertDialog.Builder
+    private lateinit var dialog: AlertDialog
+    private lateinit var mlocalSharedPreferences: LocalSharedPreferences
     private lateinit var linearLayoutManager: LinearLayoutManager
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -136,13 +136,13 @@ class MainActivity : AppCompatActivity() {
                 networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 */
-    fun showDialog() {
+    private fun showDialog() {
         if (dialog != null && !dialog.isShowing) {
             dialog.show()
         }
     }
 
-    fun hideDialog() {
+    private fun hideDialog() {
         if (dialog != null && dialog.isShowing) {
             dialog.hide()
             dialog.dismiss()
