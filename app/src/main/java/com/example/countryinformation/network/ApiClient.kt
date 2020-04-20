@@ -1,12 +1,9 @@
-package com.emedinaa.kotlinmvvm.data
+package com.example.countryinformation.network
 
-import com.example.countryinformation.network.APIInterface
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
 
 object ApiClient {
 

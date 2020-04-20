@@ -2,7 +2,7 @@ package com.example.countryinformation.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
+
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -11,26 +11,22 @@ import com.example.countryinformation.BR
 import com.example.countryinformation.R
 import com.example.countryinformation.databinding.ItemLayoutBinding
 import com.example.countryinformation.model.InfoModelData
-import com.example.countryinformation.roomdatabase.CountryEntity
 
-/*
-class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHolder>
-{
 
-    */
+
 class CountryAdapter(var countryList: ArrayList<InfoModelData>, var context:Context) : RecyclerView.Adapter<CountryAdapter.ViewHolder>() {
 
     //this method is returning the view for each item in the list
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemLayoutBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_layout, parent, false)
-        return CountryAdapter.ViewHolder(binding)
+        return ViewHolder(binding)
     }
     fun setList(countryList: ArrayList<InfoModelData>)
     {
         this.countryList=countryList
         notifyDataSetChanged()
     }
-    override fun onBindViewHolder(holder: CountryAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(countryList[position])
     }
 

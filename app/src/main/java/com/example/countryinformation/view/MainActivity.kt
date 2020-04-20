@@ -9,13 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import com.example.countryinformation.R
 import com.example.countryinformation.adapter.CountryAdapter
 import com.example.countryinformation.utils.Constant
 import com.example.countryinformation.utils.LocalSharedPreferences
 import com.example.countryinformation.utils.NetworkConnection
-import com.example.countryinformation.viewmodel.repositoty.DataViewModel
+import com.example.countryinformation.viewmodel.DataViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -42,10 +41,10 @@ class MainActivity : AppCompatActivity() {
         // Calling API
         callApi()
 
-        swipeToRefresh.setOnRefreshListener(OnRefreshListener {
+        swipeToRefresh.setOnRefreshListener {
             callApi()
 
-        })
+        }
         mAdapter = CountryAdapter(ArrayList(), this)
         linearLayoutManager = LinearLayoutManager(this)
         country_list.layoutManager = linearLayoutManager

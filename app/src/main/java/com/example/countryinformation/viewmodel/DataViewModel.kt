@@ -1,4 +1,4 @@
-package com.example.countryinformation.viewmodel.repositoty
+package com.example.countryinformation.viewmodel
 
 import android.app.Application
 import android.widget.Toast
@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.countryinformation.model.InfoModelData
 import com.example.countryinformation.roomdatabase.CountryEntity
 import com.example.countryinformation.utils.Constant
-import com.example.countryinformation.viewmodel.ResponseCallback
+import com.example.countryinformation.viewmodel.repositoty.RepositoryViewModel
 import org.jetbrains.annotations.NotNull
 
 class DataViewModel(@NotNull application: Application) : AndroidViewModel(application),ResponseCallback{

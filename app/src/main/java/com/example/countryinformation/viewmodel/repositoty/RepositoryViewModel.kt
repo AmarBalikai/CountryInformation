@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.emedinaa.kotlinmvvm.data.ApiClient
+import com.example.countryinformation.network.ApiClient
 import com.example.countryinformation.model.CountryModel
 import com.example.countryinformation.model.InfoModelData
 import com.example.countryinformation.roomdatabase.CountryDao
@@ -26,7 +26,7 @@ class RepositoryViewModel {
     lateinit var mlocalSharedPreferences: LocalSharedPreferences
     private lateinit var countryDatabase: CountryDatabase
 
-    public constructor(application: Application) {
+     constructor(application: Application) {
         mlocalSharedPreferences = LocalSharedPreferences()
         countryDatabase = CountryDatabase.invoke(application)
         countryDao = countryDatabase.getCountryDao()
