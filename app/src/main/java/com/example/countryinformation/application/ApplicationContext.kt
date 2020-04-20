@@ -3,8 +3,7 @@ package com.example.countryinformation.application
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.countryinformation.R
-import com.example.countryinformation.utils.Constentes
+import com.example.countryinformation.utils.Constant
 
 class ApplicationContext : Application() {
     lateinit var sharedPreferencesEdit: SharedPreferences.Editor
@@ -19,17 +18,17 @@ class ApplicationContext : Application() {
         super.onCreate()
 
         sharedPreferencesEdit =
-            getSharedPreferences(Constentes.countryInfo, Context.MODE_PRIVATE).edit()
+            getSharedPreferences(Constant.countryInfo, Context.MODE_PRIVATE).edit()
 
         sharedPreferences =
-            getSharedPreferences(Constentes.countryInfo, Context.MODE_PRIVATE)
+            getSharedPreferences(Constant.countryInfo, Context.MODE_PRIVATE)
 
         context = this
     }
 
     fun setPreferenceString(text: String, value: String) {
         //sharedPreferencesEdit.putString(text, value)
-        sharedPreferencesEdit.putString(Constentes.countryName, "")
+        sharedPreferencesEdit.putString(Constant.countryName, "")
         sharedPreferencesEdit.apply()
         sharedPreferencesEdit.commit()
 

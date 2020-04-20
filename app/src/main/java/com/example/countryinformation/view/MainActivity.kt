@@ -1,10 +1,6 @@
 package com.example.countryinformation.view
 
 import android.app.AlertDialog
-import android.content.Context
-import android.content.SharedPreferences
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
@@ -16,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import com.example.countryinformation.R
 import com.example.countryinformation.adapter.CountryAdapter
-import com.example.countryinformation.utils.Constentes
+import com.example.countryinformation.utils.Constant
+import com.example.countryinformation.utils.LocalSharedPreferences
+import com.example.countryinformation.utils.NetworkConnection
 import com.example.countryinformation.viewmodel.repositoty.DataViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -24,21 +22,22 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     private lateinit var mDataViewModel: DataViewModel
     private lateinit var mAdapter: CountryAdapter
-    lateinit var sharedPreferences: SharedPreferences
+   // lateinit var sharedPreferences: SharedPreferences
     lateinit var builder: AlertDialog.Builder
     lateinit var dialog: AlertDialog
+    lateinit var mlocalSharedPreferences: LocalSharedPreferences
     private lateinit var linearLayoutManager: LinearLayoutManager
-// android:text="@{data.title==null?`No title`:data.title}"
-    //lateinit var binding:ActivityMainBinding
+
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        mlocalSharedPreferences = LocalSharedPreferences()
         mDataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
         setupDialog()
-        sharedPreferences =
-            application.getSharedPreferences(Constentes.countryInfo, Context.MODE_PRIVATE)
+     //   sharedPreferences = mlocalSharedPreferences.getSharedPre(application)
+        //application.getSharedPreferences(Constentes.countryInfo, Context.MODE_PRIVATE)
+       // mlocalSharedPreferences.initSharedPreference(application)
 
         // Calling API
         callApi()
@@ -56,11 +55,14 @@ class MainActivity : AppCompatActivity() {
             hideDialog()
             swipeToRefresh.isRefreshing = false
             //update title
-            if(sharedPreferences.getString(Constentes.countryName, "")!="")
-            {
-                this.supportActionBar?.title =sharedPreferences.getString(Constentes.countryName, "")
+            /*if (sharedPreferences.getString(Constentes.countryName, "") != "") {
+                this.supportActionBar?.title =
+                    sharedPreferences.getString(Constentes.countryName, "")
+            }*/
+            if (mlocalSharedPreferences.getString(Constant.countryName) != "") {
+                this.supportActionBar?.title =
+                    mlocalSharedPreferences.getString(Constant.countryName)
             }
-
             //setup list
             mAdapter.setList(countryList)
 
@@ -71,10 +73,14 @@ class MainActivity : AppCompatActivity() {
     private fun callApi() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (isNetworkConnected()) {
+            if (NetworkConnection.isNetworkConnected()) {
                 showDialog()
                 mDataViewModel.getData()
             } else {
+                if(swipeToRefresh.isRefreshing)
+                {
+                    swipeToRefresh.isRefreshing=false
+                }
                 Toast.makeText(
                     applicationContext,
                     getString(R.string.device_not_connected_to_internet),
@@ -82,11 +88,15 @@ class MainActivity : AppCompatActivity() {
                 ).show()
             }
         } else {
-            if (isNetworkConnectedKitkat()) {
+            if (NetworkConnection.isNetworkConnectedKitkat()) {
                 showDialog()
                 mDataViewModel.getData()
 
             } else {
+                if(swipeToRefresh.isRefreshing)
+                {
+                    swipeToRefresh.isRefreshing=false
+                }
                 Toast.makeText(
                     applicationContext,
                     getString(R.string.device_not_connected_to_internet),
@@ -107,26 +117,26 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun isNetworkConnectedKitkat(): Boolean {
+    /*private fun isNetworkConnectedKitkat(): Boolean {
         val cm = application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         return cm.isActiveNetworkMetered
         //return isMetered
-    }
+    }*/
 
-    @RequiresApi(Build.VERSION_CODES.M)
+    /*@RequiresApi(Build.VERSION_CODES.M)
     private fun isNetworkConnected(): Boolean {
-        //1
+
         val connectivityManager =
             getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        //2
+
         val activeNetwork = connectivityManager.activeNetwork
-        //3
+
         val networkCapabilities = connectivityManager.getNetworkCapabilities(activeNetwork)
-        //4
+
         return networkCapabilities != null &&
                 networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
-
+*/
     fun showDialog() {
         if (dialog != null && !dialog.isShowing) {
             dialog.show()

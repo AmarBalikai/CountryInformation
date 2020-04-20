@@ -1,6 +1,6 @@
 package com.example.countryinformation.utils
 
-class Constentes
+class Constant
 {
     companion object
     {
