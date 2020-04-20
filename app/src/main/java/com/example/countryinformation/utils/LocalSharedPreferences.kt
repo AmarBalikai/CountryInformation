@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.example.countryinformation.application.ApplicationContext.Companion.context
 
-class LocalSharedPreferences() {
+class LocalSharedPreferences {
     private var mSharedPreferences: SharedPreferences =
         context.getSharedPreferences(Constant.countryInfo, Context.MODE_PRIVATE)
     private lateinit var sharedPreferencesEdit: SharedPreferences.Editor

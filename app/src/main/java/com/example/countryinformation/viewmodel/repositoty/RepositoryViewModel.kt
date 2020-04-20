@@ -1,7 +1,7 @@
 package com.example.countryinformation.viewmodel.repositoty
 
 import android.app.Application
-import android.content.SharedPreferences
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.countryinformation.network.ApiClient
@@ -20,13 +20,12 @@ import retrofit2.Response
 class RepositoryViewModel(application: Application) {
 
     private var countryDao: CountryDao
-    private lateinit var listCountry: LiveData<List<CountryEntity>>
+
 
     var mlocalSharedPreferences: LocalSharedPreferences = LocalSharedPreferences()
-    private lateinit var countryDatabase: CountryDatabase
+    private var countryDatabase: CountryDatabase = CountryDatabase.invoke(application)
 
     init {
-        countryDatabase = CountryDatabase.invoke(application)
         countryDao = countryDatabase.getCountryDao()
     }
 

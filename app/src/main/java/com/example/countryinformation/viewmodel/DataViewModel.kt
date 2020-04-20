@@ -5,7 +5,6 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.countryinformation.model.InfoModelData
-import com.example.countryinformation.roomdatabase.CountryEntity
 import com.example.countryinformation.utils.Constant
 import com.example.countryinformation.viewmodel.repositoty.RepositoryViewModel
 import org.jetbrains.annotations.NotNull
@@ -32,7 +31,7 @@ class DataViewModel(@NotNull application: Application) : AndroidViewModel(applic
     }
 
     override fun onError(error: String?) {
-        Toast.makeText(getApplication(),Constant.something_went_wrong,Toast.LENGTH_SHORT).show()
+        Toast.makeText(getApplication(),Constant.somethingWentWrong,Toast.LENGTH_SHORT).show()
         dataList.value= ArrayList()
     }
 
