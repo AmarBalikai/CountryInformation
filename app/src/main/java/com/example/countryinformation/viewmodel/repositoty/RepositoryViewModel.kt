@@ -2,14 +2,13 @@ package com.example.countryinformation.viewmodel.repositoty
 
 import android.app.Application
 
-import androidx.lifecycle.LiveData
+
 import androidx.lifecycle.MutableLiveData
 import com.example.countryinformation.network.ApiClient
 import com.example.countryinformation.model.CountryModel
 import com.example.countryinformation.model.InfoModelData
 import com.example.countryinformation.roomdatabase.CountryDao
 import com.example.countryinformation.roomdatabase.CountryDatabase
-import com.example.countryinformation.roomdatabase.CountryEntity
 import com.example.countryinformation.utils.Constant
 import com.example.countryinformation.utils.LocalSharedPreferences
 import com.example.countryinformation.viewmodel.ResponseCallback
