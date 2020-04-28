@@ -29,7 +29,7 @@ class RepositoryViewModel(application: Application) {
     }
 
     //get data from server
-    fun getDataFromServer(objCallback: ResponseCallback) {
+    fun retrieveCountryFeaturesData(objCallback: ResponseCallback) {
         val listResponse: MutableLiveData<ArrayList<InfoModelData>> = MutableLiveData()
 
         val data: Call<CountryModel>? = ApiClient.build()?.getList()

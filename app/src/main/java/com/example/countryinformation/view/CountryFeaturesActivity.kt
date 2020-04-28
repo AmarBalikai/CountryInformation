@@ -18,7 +18,7 @@ import com.example.countryinformation.viewmodel.DataViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class CountryFeaturesActivity : AppCompatActivity() {
     private lateinit var mDataViewModel: DataViewModel
     private lateinit var mAdapter: CountryAdapter
     private lateinit var builder: AlertDialog.Builder
@@ -35,10 +35,10 @@ class MainActivity : AppCompatActivity() {
         setupDialog()
 
         // Calling API
-        callApi()
+        getCountryFeaturesData()
 
         swipeToRefresh.setOnRefreshListener {
-            callApi()
+            getCountryFeaturesData()
 
         }
         mAdapter = CountryAdapter(ArrayList(), this)
@@ -61,12 +61,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun callApi() {
+    private fun getCountryFeaturesData() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (NetworkConnection.isNetworkConnected()) {
                 showDialog()
-                mDataViewModel.getData()
+                mDataViewModel.getCountryInformation()
             } else {
                 if (swipeToRefresh.isRefreshing) {
                     swipeToRefresh.isRefreshing = false
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             if (NetworkConnection.isNetworkConnectedKitkat()) {
                 showDialog()
-                mDataViewModel.getData()
+                mDataViewModel.getCountryInformation()
 
             } else {
                 if (swipeToRefresh.isRefreshing) {

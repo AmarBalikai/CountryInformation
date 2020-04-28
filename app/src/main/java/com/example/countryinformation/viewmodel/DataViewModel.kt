@@ -21,8 +21,8 @@ class DataViewModel(@NotNull application: Application) : AndroidViewModel(applic
 
     }
     //Calling API
-    fun getData() {
-        repositoryViewModel.getDataFromServer(this)
+    fun getCountryInformation() {
+        repositoryViewModel.retrieveCountryFeaturesData(this)
     }
     //Success callback
     override fun onSuccess(data: MutableLiveData<ArrayList<InfoModelData>>?) {
