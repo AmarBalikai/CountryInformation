@@ -7,6 +7,4 @@ interface ResponseCallback
 {
     fun onSuccess(data: MutableLiveData<ArrayList<InfoModelData>>?)
     fun onError(error:String?)
-
-
 }

@@ -9,6 +9,7 @@ import com.example.countryinformation.application.ApplicationContext.Companion.c
 
 class NetworkConnection {
     companion object {
+        //checking internet
         @RequiresApi(Build.VERSION_CODES.M)
         fun isNetworkConnected(): Boolean {
 
@@ -26,7 +27,7 @@ class NetworkConnection {
         fun isNetworkConnectedKitkat(): Boolean {
             val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             return cm.isActiveNetworkMetered
-            //return isMetered
+
         }
     }
 

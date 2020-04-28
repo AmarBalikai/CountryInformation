@@ -21,7 +21,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     private lateinit var mDataViewModel: DataViewModel
     private lateinit var mAdapter: CountryAdapter
-   // lateinit var sharedPreferences: SharedPreferences
     private lateinit var builder: AlertDialog.Builder
     private lateinit var dialog: AlertDialog
     private lateinit var mlocalSharedPreferences: LocalSharedPreferences
@@ -34,9 +33,6 @@ class MainActivity : AppCompatActivity() {
         mlocalSharedPreferences = LocalSharedPreferences()
         mDataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
         setupDialog()
-     //   sharedPreferences = mlocalSharedPreferences.getSharedPre(application)
-        //application.getSharedPreferences(Constentes.countryInfo, Context.MODE_PRIVATE)
-       // mlocalSharedPreferences.initSharedPreference(application)
 
         // Calling API
         callApi()
@@ -54,10 +50,6 @@ class MainActivity : AppCompatActivity() {
             hideDialog()
             swipeToRefresh.isRefreshing = false
             //update title
-            /*if (sharedPreferences.getString(Constentes.countryName, "") != "") {
-                this.supportActionBar?.title =
-                    sharedPreferences.getString(Constentes.countryName, "")
-            }*/
             if (mlocalSharedPreferences.getString(Constant.countryName) != "") {
                 this.supportActionBar?.title =
                     mlocalSharedPreferences.getString(Constant.countryName)
@@ -76,9 +68,8 @@ class MainActivity : AppCompatActivity() {
                 showDialog()
                 mDataViewModel.getData()
             } else {
-                if(swipeToRefresh.isRefreshing)
-                {
-                    swipeToRefresh.isRefreshing=false
+                if (swipeToRefresh.isRefreshing) {
+                    swipeToRefresh.isRefreshing = false
                 }
                 Toast.makeText(
                     applicationContext,
@@ -92,9 +83,8 @@ class MainActivity : AppCompatActivity() {
                 mDataViewModel.getData()
 
             } else {
-                if(swipeToRefresh.isRefreshing)
-                {
-                    swipeToRefresh.isRefreshing=false
+                if (swipeToRefresh.isRefreshing) {
+                    swipeToRefresh.isRefreshing = false
                 }
                 Toast.makeText(
                     applicationContext,
@@ -116,26 +106,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    /*private fun isNetworkConnectedKitkat(): Boolean {
-        val cm = application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        return cm.isActiveNetworkMetered
-        //return isMetered
-    }*/
-
-    /*@RequiresApi(Build.VERSION_CODES.M)
-    private fun isNetworkConnected(): Boolean {
-
-        val connectivityManager =
-            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-        val activeNetwork = connectivityManager.activeNetwork
-
-        val networkCapabilities = connectivityManager.getNetworkCapabilities(activeNetwork)
-
-        return networkCapabilities != null &&
-                networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-    }
-*/
     private fun showDialog() {
         if (dialog != null && !dialog.isShowing) {
             dialog.show()

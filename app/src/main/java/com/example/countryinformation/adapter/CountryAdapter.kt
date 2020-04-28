@@ -37,7 +37,7 @@ class CountryAdapter(private var countryList: ArrayList<InfoModelData>,private v
 
     class ViewHolder(private val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: InfoModelData) {
-
+            //Loading image
             Glide.with(itemView)
                 .load(data.imageHref)
                 .placeholder(R.drawable.no_image)

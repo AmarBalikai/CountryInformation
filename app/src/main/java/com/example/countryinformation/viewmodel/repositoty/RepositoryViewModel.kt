@@ -28,7 +28,7 @@ class RepositoryViewModel(application: Application) {
         countryDao = countryDatabase.getCountryDao()
     }
 
-
+    //get data from server
     fun getDataFromServer(objCallback: ResponseCallback) {
         val listResponse: MutableLiveData<ArrayList<InfoModelData>> = MutableLiveData()
 
@@ -46,7 +46,6 @@ class RepositoryViewModel(application: Application) {
             }
             override fun onFailure(call: Call<CountryModel>, t: Throwable) {
                 objCallback.onError(t.message)
-               // listResponse=null
             }
         })
     }

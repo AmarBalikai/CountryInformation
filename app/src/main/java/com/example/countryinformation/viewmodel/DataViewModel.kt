@@ -20,16 +20,17 @@ class DataViewModel(@NotNull application: Application) : AndroidViewModel(applic
         dataList= MutableLiveData<ArrayList<InfoModelData>>()
 
     }
+    //Calling API
     fun getData() {
         repositoryViewModel.getDataFromServer(this)
     }
-
+    //Success callback
     override fun onSuccess(data: MutableLiveData<ArrayList<InfoModelData>>?) {
         if (data != null) {
             dataList.value=data.value
         }
     }
-
+    //Failure callback
     override fun onError(error: String?) {
         Toast.makeText(getApplication(),Constant.somethingWentWrong,Toast.LENGTH_SHORT).show()
         dataList.value= ArrayList()
