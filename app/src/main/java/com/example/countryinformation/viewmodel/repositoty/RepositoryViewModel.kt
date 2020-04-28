@@ -21,7 +21,7 @@ class RepositoryViewModel(application: Application) {
     private var countryDao: CountryDao
 
 
-    var mlocalSharedPreferences: LocalSharedPreferences = LocalSharedPreferences()
+    var mLocalSharedPreferences: LocalSharedPreferences = LocalSharedPreferences()
     private var countryDatabase: CountryDatabase = CountryDatabase.invoke(application)
 
     init {
@@ -37,7 +37,7 @@ class RepositoryViewModel(application: Application) {
             override fun onResponse(call: Call<CountryModel>, response: Response<CountryModel>) {
                 if (response.isSuccessful) {
 
-                    mlocalSharedPreferences.putString(Constant.countryName,response.body()?.title)
+                    mLocalSharedPreferences.putString(Constant.countryName,response.body()?.title)
                     listResponse.value = response.body()?.rows
                     objCallback.onSuccess(listResponse)
 

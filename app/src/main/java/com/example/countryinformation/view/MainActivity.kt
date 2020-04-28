@@ -23,14 +23,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mAdapter: CountryAdapter
     private lateinit var builder: AlertDialog.Builder
     private lateinit var dialog: AlertDialog
-    private lateinit var mlocalSharedPreferences: LocalSharedPreferences
+    private lateinit var mLocalSharedPreferences: LocalSharedPreferences
     private lateinit var linearLayoutManager: LinearLayoutManager
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mlocalSharedPreferences = LocalSharedPreferences()
+        mLocalSharedPreferences = LocalSharedPreferences()
         mDataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
         setupDialog()
 
@@ -50,9 +50,9 @@ class MainActivity : AppCompatActivity() {
             hideDialog()
             swipeToRefresh.isRefreshing = false
             //update title
-            if (mlocalSharedPreferences.getString(Constant.countryName) != "") {
+            if (mLocalSharedPreferences.getString(Constant.countryName) != "") {
                 this.supportActionBar?.title =
-                    mlocalSharedPreferences.getString(Constant.countryName)
+                    mLocalSharedPreferences.getString(Constant.countryName)
             }
             //setup list
             mAdapter.setList(countryList)
