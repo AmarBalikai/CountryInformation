@@ -14,12 +14,12 @@ import com.example.countryinformation.adapter.CountryAdapter
 import com.example.countryinformation.utils.Constant
 import com.example.countryinformation.utils.LocalSharedPreferences
 import com.example.countryinformation.utils.NetworkConnection
-import com.example.countryinformation.viewmodel.DataViewModel
+import com.example.countryinformation.viewmodel.CountryViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class CountryFeaturesActivity : AppCompatActivity() {
-    private lateinit var mDataViewModel: DataViewModel
+    private lateinit var mDataViewModel: CountryViewModel
     private lateinit var mAdapter: CountryAdapter
     private lateinit var builder: AlertDialog.Builder
     private lateinit var dialog: AlertDialog
@@ -31,7 +31,7 @@ class CountryFeaturesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mLocalSharedPreferences = LocalSharedPreferences()
-        mDataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
+        mDataViewModel = ViewModelProvider(this).get(CountryViewModel::class.java)
         setupDialog()
 
         // Calling API
@@ -45,7 +45,7 @@ class CountryFeaturesActivity : AppCompatActivity() {
         linearLayoutManager = LinearLayoutManager(this)
         country_list.layoutManager = linearLayoutManager
         country_list.adapter = mAdapter
-        mDataViewModel.dataList.observe(this, Observer { countryList ->
+        mDataViewModel.countryList.observe(this, Observer { countryList ->
 
             hideDialog()
             swipeToRefresh.isRefreshing = false
@@ -58,7 +58,13 @@ class CountryFeaturesActivity : AppCompatActivity() {
             mAdapter.setList(countryList)
 
         })
-
+        mDataViewModel.apiFailResponse.observe(this, Observer { apiFailResponse ->
+            if (!apiFailResponse.responseSuccess) {
+                hideDialog()
+                swipeToRefresh.isRefreshing = false
+                Toast.makeText(this, Constant.somethingWentWrong, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun getCountryFeaturesData() {
@@ -118,5 +124,4 @@ class CountryFeaturesActivity : AppCompatActivity() {
             dialog.dismiss()
         }
     }
-
 }

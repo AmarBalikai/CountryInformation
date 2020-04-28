@@ -17,10 +17,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RepositoryViewModel(application: Application) {
-
     private var countryDao: CountryDao
-
-
     var mLocalSharedPreferences: LocalSharedPreferences = LocalSharedPreferences()
     private var countryDatabase: CountryDatabase = CountryDatabase.invoke(application)
 
@@ -40,8 +37,6 @@ class RepositoryViewModel(application: Application) {
                     mLocalSharedPreferences.putString(Constant.countryName,response.body()?.title)
                     listResponse.value = response.body()?.rows
                     objCallback.onSuccess(listResponse)
-
-
                 }
             }
             override fun onFailure(call: Call<CountryModel>, t: Throwable) {
