@@ -34,30 +34,48 @@ class CountryFeaturesActivity : AppCompatActivity() {
         mDataViewModel = ViewModelProvider(this).get(CountryViewModel::class.java)
         setupDialog()
 
-        // Calling API
+        /**
+         * This method is calling API in ViewModel class
+         */
         getCountryFeaturesData()
 
+        /**
+         * Implemented swap to refresh listener
+         */
         swipeToRefresh.setOnRefreshListener {
             getCountryFeaturesData()
 
         }
+        /**
+         * Setting blank adapter for initialize
+         */
         mAdapter = CountryAdapter(ArrayList(), this)
         linearLayoutManager = LinearLayoutManager(this)
         country_list.layoutManager = linearLayoutManager
         country_list.adapter = mAdapter
+        /**
+         * Created observer for server list
+         */
         mDataViewModel.countryList.observe(this, Observer { countryList ->
 
             hideDialog()
             swipeToRefresh.isRefreshing = false
-            //update title
+            /**
+             * Updating toolbar title
+             */
             if (mLocalSharedPreferences.getString(Constant.countryName) != "") {
                 this.supportActionBar?.title =
                     mLocalSharedPreferences.getString(Constant.countryName)
             }
-            //setup list
+            /**
+             * Setting updated list to recyclerview adapter
+             */
             mAdapter.setList(countryList)
 
         })
+        /**
+         * Created observer for error response
+         */
         mDataViewModel.apiFailResponse.observe(this, Observer { apiFailResponse ->
             if (!apiFailResponse.responseSuccess) {
                 hideDialog()
@@ -66,7 +84,9 @@ class CountryFeaturesActivity : AppCompatActivity() {
             }
         })
     }
-
+    /**
+     * This method for get data from the viewModel
+     */
     private fun getCountryFeaturesData() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -102,7 +122,9 @@ class CountryFeaturesActivity : AppCompatActivity() {
         }
 
     }
-
+    /**
+     * Showing dialog when api call
+     */
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun setupDialog() {
         builder = AlertDialog.Builder(this)
@@ -111,13 +133,17 @@ class CountryFeaturesActivity : AppCompatActivity() {
         dialog = builder.create()
 
     }
-
+    /**
+     * Showing dialog when api call
+     */
     private fun showDialog() {
         if (dialog != null && !dialog.isShowing) {
             dialog.show()
         }
     }
-
+    /**
+     * Hiding dialog
+     */
     private fun hideDialog() {
         if (dialog != null && dialog.isShowing) {
             dialog.hide()

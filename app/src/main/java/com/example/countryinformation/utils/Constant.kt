@@ -1,5 +1,8 @@
 package com.example.countryinformation.utils
 
+/**
+ * All Constants are present in this class
+ */
 class Constant
 {
     companion object
@@ -9,5 +12,4 @@ class Constant
         const val countryInfo:String="CountryInfo"
         const val countryName:String="countryName"
     }
-
 }

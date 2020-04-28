@@ -5,6 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
+/**
+ * This class is creating for room database
+ */
 @Database(entities = [CountryEntity::class], version = 1)
 abstract class CountryDatabase : RoomDatabase(){
     abstract fun getCountryDao(): CountryDao

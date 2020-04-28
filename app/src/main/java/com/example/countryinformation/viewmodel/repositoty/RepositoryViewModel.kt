@@ -25,7 +25,9 @@ class RepositoryViewModel(application: Application) {
         countryDao = countryDatabase.getCountryDao()
     }
 
-    //get data from server
+    /**
+     * This method for getting list of objects from the server
+     */
     fun retrieveCountryFeaturesData(objCallback: ResponseCallback) {
         val listResponse: MutableLiveData<ArrayList<InfoModelData>> = MutableLiveData()
 
@@ -36,13 +38,18 @@ class RepositoryViewModel(application: Application) {
 
                     mLocalSharedPreferences.putString(Constant.countryName,response.body()?.title)
                     listResponse.value = response.body()?.rows
+                    /**
+                     * Send success response to viewModel using this callback
+                     */
                     objCallback.onSuccess(listResponse)
                 }
             }
             override fun onFailure(call: Call<CountryModel>, t: Throwable) {
+                /**
+                 * Send failure response to viewModel
+                 */
                 objCallback.onError(t.message)
             }
         })
     }
-
 }

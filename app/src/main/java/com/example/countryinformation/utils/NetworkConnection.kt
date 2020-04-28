@@ -7,9 +7,14 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.countryinformation.application.ApplicationContext.Companion.context
 
+/**
+ * This class for internet connection
+ */
 class NetworkConnection {
     companion object {
-        //checking internet
+        /**
+         * checking internet is available or not
+         */
         @RequiresApi(Build.VERSION_CODES.M)
         fun isNetworkConnected(): Boolean {
 
@@ -27,7 +32,6 @@ class NetworkConnection {
         fun isNetworkConnectedKitkat(): Boolean {
             val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             return cm.isActiveNetworkMetered
-
         }
     }
 
