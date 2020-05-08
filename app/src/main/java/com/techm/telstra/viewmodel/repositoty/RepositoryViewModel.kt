@@ -15,6 +15,7 @@ import com.techm.telstra.viewmodel.ResponseCallback
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 /**
  * This class for calling API
  * @param application for create room database object
@@ -40,7 +41,7 @@ class RepositoryViewModel(application: Application) {
             override fun onResponse(call: Call<CountryModel>, response: Response<CountryModel>) {
                 if (response.isSuccessful) {
 
-                    mLocalSharedPreferences.putString(Constant.countryName,response.body()?.title)
+                    mLocalSharedPreferences.putString(Constant.countryName, response.body()?.title)
                     listResponse.value = response.body()?.rows
                     /**
                      * Send success response to viewModel using this callback
@@ -48,6 +49,7 @@ class RepositoryViewModel(application: Application) {
                     objCallback.onSuccess(listResponse)
                 }
             }
+
             override fun onFailure(call: Call<CountryModel>, t: Throwable) {
                 /**
                  * Send failure response to viewModel

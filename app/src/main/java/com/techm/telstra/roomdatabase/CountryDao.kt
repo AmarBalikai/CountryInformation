@@ -18,5 +18,5 @@ interface CountryDao {
     fun insertAll(countries: ArrayList<CountryEntity>?)
 
     @Query("DELETE FROM country_table")
-     fun deleteAllUsers()
+    fun deleteAllUsers()
 }

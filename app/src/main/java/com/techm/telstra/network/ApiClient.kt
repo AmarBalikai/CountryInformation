@@ -14,6 +14,7 @@ object ApiClient {
     private const val API_BASE_URL = "https://dl.dropboxusercontent.com"
 
     private var servicesApiInterface: APIInterface? = null
+
     /**
      * This method is initialize for retrofit object
      * @return APIInterface instance

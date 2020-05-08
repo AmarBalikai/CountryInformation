@@ -25,6 +25,7 @@ class LocalSharedPreferences {
 
         return ""
     }
+
     /**
      * This method for storing Country name
      */

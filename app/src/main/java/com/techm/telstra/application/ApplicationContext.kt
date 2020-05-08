@@ -2,6 +2,7 @@ package com.techm.telstra.application
 
 import android.app.Application
 import android.content.Context
+
 /**
  * This class for creating creating application context
  */
@@ -10,6 +11,7 @@ class ApplicationContext : Application() {
     companion object {
         lateinit var context: Context
     }
+
     /**
      * This method is used to initialize the context
      */

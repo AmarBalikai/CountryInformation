@@ -34,19 +34,10 @@ class CountryFeaturesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         mLocalSharedPreferences = LocalSharedPreferences()
         mDataViewModel = ViewModelProvider(this).get(CountryViewModel::class.java)
-        setupDialog()
+        setupProgressDialog()
 
-        /**
-         * This method is calling API in ViewModel class
-         */
-       // getCountryFeaturesData()
-
-        /**
-         * Implemented swap to refresh listener
-         */
         swipeToRefresh.setOnRefreshListener {
             getCountryFeaturesData()
-
         }
         /**
          * Setting blank adapter for initialize
@@ -61,7 +52,7 @@ class CountryFeaturesActivity : AppCompatActivity() {
          */
         mDataViewModel.countryList.observe(this, Observer { countryList ->
 
-            hideDialog()
+            hideProgressDialog()
             swipeToRefresh.isRefreshing = false
             /**
              * Updating toolbar title
@@ -82,14 +73,15 @@ class CountryFeaturesActivity : AppCompatActivity() {
         mDataViewModel.apiFailResponse.observe(this, Observer { apiFailResponse ->
             apiFailResponse.let {
                 if (!apiFailResponse.responseSuccess) {
-                    hideDialog()
+                    hideProgressDialog()
                     swipeToRefresh.isRefreshing = false
-                    Toast.makeText(this, Constant.somethingWentWrong, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, Constant.serviceFailureError, Toast.LENGTH_SHORT).show()
                 }
             }
 
         })
     }
+
     /**
      * This method for get data from the viewModel
      */
@@ -97,7 +89,7 @@ class CountryFeaturesActivity : AppCompatActivity() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (NetworkConnection.isNetworkConnected()) {
-                showDialog()
+                showProgressDialog()
                 mDataViewModel.getCountryInformation()
             } else {
                 if (swipeToRefresh.isRefreshing) {
@@ -111,7 +103,7 @@ class CountryFeaturesActivity : AppCompatActivity() {
             }
         } else {
             if (NetworkConnection.isNetworkConnectedKitkat()) {
-                showDialog()
+                showProgressDialog()
                 mDataViewModel.getCountryInformation()
 
             } else {
@@ -124,33 +116,27 @@ class CountryFeaturesActivity : AppCompatActivity() {
                     Toast.LENGTH_LONG
                 ).show()
             }
-
         }
-
     }
+
     /**
      * Showing dialog when api call
      */
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    private fun setupDialog() {
+    private fun setupProgressDialog() {
         builder = AlertDialog.Builder(this)
-        builder.setCancelable(false) // if you want user to wait for some process to finish,
+        builder.setCancelable(false)
         builder.setView(R.layout.layout_loading_dialog)
         dialog = builder.create()
-
     }
-    /**
-     * Showing dialog when api call
-     */
-    private fun showDialog() {
+
+    private fun showProgressDialog() {
         if (dialog != null && !dialog.isShowing) {
             dialog.show()
         }
     }
-    /**
-     * Hiding dialog
-     */
-    private fun hideDialog() {
+
+    private fun hideProgressDialog() {
         if (dialog != null && dialog.isShowing) {
             dialog.hide()
             dialog.dismiss()
