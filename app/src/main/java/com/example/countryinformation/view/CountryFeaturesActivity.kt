@@ -17,7 +17,9 @@ import com.example.countryinformation.utils.NetworkConnection
 import com.example.countryinformation.viewmodel.CountryViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
-
+/**
+ * This class for showing country list
+ * */
 class CountryFeaturesActivity : AppCompatActivity() {
     private lateinit var mDataViewModel: CountryViewModel
     private lateinit var mAdapter: CountryAdapter
@@ -37,7 +39,7 @@ class CountryFeaturesActivity : AppCompatActivity() {
         /**
          * This method is calling API in ViewModel class
          */
-        getCountryFeaturesData()
+       // getCountryFeaturesData()
 
         /**
          * Implemented swap to refresh listener
@@ -55,6 +57,7 @@ class CountryFeaturesActivity : AppCompatActivity() {
         country_list.adapter = mAdapter
         /**
          * Created observer for server list
+         * @param countryList for to get updated list
          */
         mDataViewModel.countryList.observe(this, Observer { countryList ->
 
@@ -77,11 +80,14 @@ class CountryFeaturesActivity : AppCompatActivity() {
          * Created observer for error response
          */
         mDataViewModel.apiFailResponse.observe(this, Observer { apiFailResponse ->
-            if (!apiFailResponse.responseSuccess) {
-                hideDialog()
-                swipeToRefresh.isRefreshing = false
-                Toast.makeText(this, Constant.somethingWentWrong, Toast.LENGTH_SHORT).show()
+            apiFailResponse.let {
+                if (!apiFailResponse.responseSuccess) {
+                    hideDialog()
+                    swipeToRefresh.isRefreshing = false
+                    Toast.makeText(this, Constant.somethingWentWrong, Toast.LENGTH_SHORT).show()
+                }
             }
+
         })
     }
     /**
@@ -145,6 +151,14 @@ class CountryFeaturesActivity : AppCompatActivity() {
      * Hiding dialog
      */
     private fun hideDialog() {
+        if (dialog != null && dialog.isShowing) {
+            dialog.hide()
+            dialog.dismiss()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
         if (dialog != null && dialog.isShowing) {
             dialog.hide()
             dialog.dismiss()

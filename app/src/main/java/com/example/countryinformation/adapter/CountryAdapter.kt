@@ -24,6 +24,7 @@ class CountryAdapter(private var countryList: ArrayList<InfoModelData>,private v
     }
     /**
      * This method for setting list to current list from another class
+     * @param countryList for to get updated list
      */
     fun setList(countryList: ArrayList<InfoModelData>)
     {

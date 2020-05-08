@@ -15,7 +15,10 @@ import com.example.countryinformation.viewmodel.ResponseCallback
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
+/**
+ * This class for calling API
+ * @param application for create room database object
+ * */
 class RepositoryViewModel(application: Application) {
     private var countryDao: CountryDao
     var mLocalSharedPreferences: LocalSharedPreferences = LocalSharedPreferences()
@@ -27,6 +30,7 @@ class RepositoryViewModel(application: Application) {
 
     /**
      * This method for getting list of objects from the server
+     * @param objCallback for get response to viewmodel
      */
     fun retrieveCountryFeaturesData(objCallback: ResponseCallback) {
         val listResponse: MutableLiveData<ArrayList<InfoModelData>> = MutableLiveData()
