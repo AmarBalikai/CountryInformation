@@ -8,13 +8,28 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="MyTheme" parent="android:Theme">
-        <item name="android:textViewStyle">@style/MyTextViewStyle</item>
+    <style name="TextViewTitleTheme" parent="android:Theme">
+        <item name="android:textViewStyle">@style/MyTextViewTitleStyle</item>
     </style>
 
-    <style name="MyTextViewStyle" parent="android:Widget.TextView">
+    <style name="MyTextViewTitleStyle" parent="android:Widget.TextView">
         <item name="android:typeface">sans</item>
         <item name="fontFamily">serif</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:textSize">@dimen/_14ssp</item>
+        <item name="android:textStyle">bold</item>
 
     </style>
+
+    <style name="TextViewDescriptionTheme" parent="android:Theme">
+        <item name="android:textViewStyle">@style/MyTextViewDescriptionStyle</item>
+    </style>
+
+    <style name="MyTextViewDescriptionStyle" parent="android:Widget.TextView">
+        <item name="android:typeface">sans</item>
+        <item name="fontFamily">serif</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/_12ssp</item>
+    </style>
+
 </resources>

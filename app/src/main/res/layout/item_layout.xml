@@ -45,13 +45,10 @@
 
                     <TextView
                         android:id="@+id/tvName"
-                        style="@style/MyTextViewStyle"
+                        style="@style/MyTextViewTitleStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{data.title!=null?data.title:`No Title`}"
-                        android:textColor="@color/blue"
-                        android:textSize="@dimen/_14ssp"
-                        android:textStyle="bold" />
+                        android:text="@{data.title!=null?data.title:`No Title`}" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -63,18 +60,15 @@
 
                         <TextView
                             android:id="@+id/tvDesc"
-                            style="@style/MyTextViewStyle"
+                            style="@style/MyTextViewDescriptionStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.6"
                             android:paddingEnd="@dimen/_5sdp"
                             android:paddingRight="@dimen/_5sdp"
-                            android:text="@{data.description!=null?data.description:`No Description`}"
-                            android:textColor="@android:color/black"
-                            android:textSize="@dimen/_12ssp" />
+                            android:text="@{data.description!=null?data.description:`No Description`}" />
 
                         <ImageView
-
                             android:id="@+id/imgImage"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
